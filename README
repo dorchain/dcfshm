@@ -1,0 +1,17 @@
+(c) 2016 Joerg Dorchain <joerg@dorchain.net>
+
+Licenced under GNU GPL v2 or later
+
+This program reads input from a charcter device where presumably a DCF77
+receiver is connected to.
+The input is parsed and written to a shared memory segment, where ntp can
+pick it up for further timekeeping.
+
+The main motivation was the the builtin parse driver for ntp  could
+crash ntp, e.g. when weird bits came in at weird timing in bad receiving
+conditions. 
+
+Bug reports and contributions are welcome, esp. for making the code more
+portable.
+
+Works with USB Gude expert Mouse Clock II
