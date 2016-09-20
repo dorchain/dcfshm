@@ -1,0 +1,2 @@
+- signal handler for TERM (cleanup)
+- signal handler for logging dcftime content (USR1)
