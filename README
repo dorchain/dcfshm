@@ -16,6 +16,12 @@ portable.
 
 Works with USB Gude expert Mouse Clock II
 
+You may try different baud rates. One installation only works
+with 4800baud.
+
+Put this as DAEMON_ARGS in /etc/default/dcfshm, e.g.
+DAEMON_ARGS="-b 4800"
+
 Example ntp.conf snippet:
 
 server 127.127.28.0     # SHM driver fed by dcfshm 
