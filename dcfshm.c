@@ -379,7 +379,7 @@ if (!debug) {
 while (read(fd ,&c, 1) == 1 ) {
 	eprint(gettimeofday(&t, NULL), "gettimeofday failed");
 	td = (t.tv_sec - tl.tv_sec) * 1000000 + (t.tv_usec - tl.tv_usec) - 1000000;
-	if (strftime(time, 20, "%H:%M:%S", localtime(&t.tv_sec)) == 0) {
+	if (!debug && (strftime(time, 20, "%H:%M:%S", localtime(&t.tv_sec)) == 0)) {
 		lprint("strftime failed\n");
 		exit(1);
 	}
@@ -394,7 +394,7 @@ while (read(fd ,&c, 1) == 1 ) {
 			dtime->flags, dtime->minutes, dtime->hours, dtime->days, dtime->dow, dtime->months, dtime->years);
 			if (labs(t.tv_sec - dcf_time) > 999) {
 				dcf_valid = 0;
-				dprint("time warp > 1000s ignored\n");
+				lprint("time warp > 1000s ignored\n");
 			}
 		} else {
 			dcf_valid = 0;
@@ -406,7 +406,7 @@ while (read(fd ,&c, 1) == 1 ) {
 		dcf_valid = 0;
 	}
 	if (bitno > 60) {
-		dprint("Bit overflow within a minute\n");
+		lprint("Bit overflow within a minute\n");
 		dcf_valid = 0;
 	} else {
 		if (dcf_valid) {
