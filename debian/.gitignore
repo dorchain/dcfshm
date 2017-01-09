@@ -1,0 +1,7 @@
+dcfshm.debhelper.log
+dcfshm.postinst.debhelper
+dcfshm.postrm.debhelper
+dcfshm.prerm.debhelper
+dcfshm.substvars
+debhelper-build-stamp
+files 

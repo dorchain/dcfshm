@@ -25,5 +25,5 @@ DAEMON_ARGS="-b 4800"
 Example ntp.conf snippet:
 
 server 127.127.28.0     # SHM driver fed by dcfshm 
-fudge 127.127.28.0 time1 0.450 refid DCFa
+fudge 127.127.28.0 refid DCFa
 

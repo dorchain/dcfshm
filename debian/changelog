@@ -1,3 +1,9 @@
+dcfshm (0.2) UNRELEASED; urgency=medium
+
+  * Try to guess current processing offset from localtime usecs
+
+ -- Joerg Dorchain <joerg@dorchain.net>  Mon, 9 Jan 2017 13:50:27 +0100
+
 dcfshm (0.1) UNRELEASED; urgency=medium
 
   * Initial release.

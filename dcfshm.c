@@ -414,6 +414,7 @@ while (read(fd ,&c, 1) == 1 ) {
 			shm->count++;
 			memory_barrier();
 			shm->clockTimeStampSec = dcf_time++;
+			shm->clockTimeStampUSec = t.tv_usec; /* Best guess for current delay */
 			shm->receiveTimeStampSec = t.tv_sec;
 			shm->receiveTimeStampUSec = t.tv_usec;
 			shm->leap = dtime->flags & DCF_LEAP;
