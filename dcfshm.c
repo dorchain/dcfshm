@@ -14,6 +14,8 @@
 #include <sys/shm.h>
 #include <linux/serial.h>
 
+#define PIDFILE "/var/run/dcfshm.pid"
+
 /* Hack: include <asm/termios.h> gives a lot of double definition errors */
 struct termios2 {
 	tcflag_t c_iflag;		/* input mode flags */
@@ -373,7 +375,11 @@ if (localtime(&tl.tv_sec)->tm_year + 1900 > pivot_year + 99) {
 	exit(1);
 }
 if (!debug) {
-	eprint(daemon(1, 1), "daemon() failed");
+	int p;
+	eprint(daemon(0, 0), "daemon() failed");
+	eprint((p = open(PIDFILE, O_RDWR|O_CREAT|O_EXCL|O_NOCTTY, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)), "Cannot open pidfile");
+	eprint(dprintf(p, "%d\n", getpid()), "Cannot write pid");
+	eprint(close(p), "Cannot close pidfile");
 	lprint("started and detached");
 }
 while (read(fd ,&c, 1) == 1 ) {
