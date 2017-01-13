@@ -10,7 +10,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: ntp|chrony|time-daemon
 Description: puts dcf77 time into shm segment for ntp
- This program reads input from a character device where presumably
+ This program reads input from a charcter device where presumably
  a DCF77 receiver is connected to.
  The input is parsed and written to a shared memory segment, where
  ntp can pick it up for further timekeeping.
