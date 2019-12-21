@@ -214,7 +214,7 @@ struct dcftime *parsedcf(char bitno, unsigned char *bits)
 	ret.years = bits[50] + 2 * bits[51] + 4 * bits[52] + 8 * bits[53] +
 		(bits[54] + 2 * bits[55] + 4 * bits[56] + 8 * bits[57]) * 10;
 	
-	lprint("Parsed DCF time: %d.%d.%d %d:%d\n", ret.days, ret.months, ret.years, ret.hours, ret.minutes);
+	lprint("Parsed DCF time: %02d.%02d.%02d %02d:%02d, pivot year %d\n", ret.days, ret.months, ret.years, ret.hours, ret.minutes, pivot_year);
 	return &ret;
 }
 
