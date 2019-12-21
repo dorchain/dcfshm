@@ -35,7 +35,8 @@ struct termios2 {
     + (__DATE__[9] - '0') * 10 \
     + __DATE__[10] - '0'))
 
-int pivot_year; /* dcf is missing the century, so this software is only valid 100 years */
+/* dcf is missing the century, so this software is only valid for 100 years */
+int pivot_year = BUILD_YEAR;
 int debug;
 
 static inline void memory_barrier(void)
@@ -213,6 +214,7 @@ struct dcftime *parsedcf(char bitno, unsigned char *bits)
 	ret.years = bits[50] + 2 * bits[51] + 4 * bits[52] + 8 * bits[53] +
 		(bits[54] + 2 * bits[55] + 4 * bits[56] + 8 * bits[57]) * 10;
 	
+	lprint("Parsed DCF time: %d.%d.%d %d:%d\n", ret.days, ret.months, ret.years, ret.hours, ret.minutes);
 	return &ret;
 }
 
@@ -364,7 +366,6 @@ eprint(tcsetattr(fd, TCSANOW, &term), "tcsetattr failed");
 eprint(ioctl(fd, TIOCMBIC, &on), "ioctl TIOCMBIC failed");
 dprint("%s: Line initialised\n", argv[0]);
 
-pivot_year = BUILD_YEAR;
 dcf_valid = 0;
 dcf_time = 0;
 dtime = NULL;
