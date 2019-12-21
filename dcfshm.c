@@ -197,13 +197,13 @@ struct dcftime *parsedcf(char bitno, unsigned char *bits)
 	ret.minutes = bits[21] + 2 * bits[22] + 4 * bits[23] + 8 * bits[24] +
 		(bits[25] + 2 * bits[26] + 4 * bits[27]) * 10;
 	if (!pcheck(bits + 29, 6)) {
-		lprint("hour parity wrong\n");
+		lprint("Hour parity wrong\n");
 		return NULL;
 	}
 	ret.hours = bits[29] + 2 * bits[30] + 4 * bits[31] + 8 * bits[32] +
 		(bits[33] + 2 * bits[34]) * 10;
 	if (!pcheck(bits + 36, 22)) {
-		lprint("date parity wrong\n");
+		lprint("Date parity wrong\n");
 		return NULL;
 	}
 	ret.days = bits[36] + 2 * bits[37] + 4 * bits[38] + 8 * bits[39] +
