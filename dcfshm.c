@@ -28,6 +28,7 @@ struct termios2 {
 	speed_t c_ospeed;		/* output speed */
 };
 
+/* atoi() at compile time */
 #define BUILD_YEAR (\
     __DATE__[7] == '?' ? 1900 \
     : (((__DATE__[7] - '0') * 1000 ) \
@@ -36,7 +37,7 @@ struct termios2 {
     + __DATE__[10] - '0'))
 
 /* dcf is missing the century, so this software is only valid for 100 years */
-int pivot_year = BUILD_YEAR;
+const int pivot_year = BUILD_YEAR;
 int debug;
 
 static inline void memory_barrier(void)
@@ -382,6 +383,8 @@ if (!debug) {
 	eprint(dprintf(p, "%d\n", getpid()), "Cannot write pid");
 	eprint(close(p), "Cannot close pidfile");
 	lprint("started and detached");
+} else {
+	lprint("pivot year set to %d\n", pivot_year);
 }
 while (read(fd ,&c, 1) == 1 ) {
 	eprint(gettimeofday(&t, NULL), "gettimeofday failed");
