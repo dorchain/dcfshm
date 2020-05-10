@@ -272,6 +272,7 @@ void usage(const char *p, int c)
 {
 printf("Usage: %s [-d] [-u <unit>] [-b <baudrate>] [-f <device>]\n", p);
 printf("\t-d\tdebug: do not fork and print lots of internal info\n");
+printf("\t-n\tnice: set nice value (default -10)\n");
 printf("\t-u\tuse <unit> for the ntp shm driver (default 0)\n");
 printf("\t-b\tuse <baudrate> for communication (default 9600)\n");
 printf("\t-f\tuse <device> to communicated with (default /dev/ttyUSB0)\n");
@@ -300,18 +301,23 @@ int shmid;
 time_t dcf_time;
 int ntpunit;
 long int baudrate;
+int nicev;
 char *device;
 int opt;
 
 openlog(NULL, LOG_PID, LOG_DAEMON);
 debug = 0;
+nicev = -10;
 ntpunit = 0;
 baudrate = 9600;
 device = "/dev/ttyUSB0";
-while ((opt = getopt(argc, argv, "du:b:f:")) != -1) {
+while ((opt = getopt(argc, argv, "dn:u:b:f:")) != -1) {
 	switch (opt) {
 	case 'd':
 		debug = 1;
+		break;
+	case 'n':
+		nicev = atoi(optarg);
 		break;
 	case 'u':
 		ntpunit = atoi(optarg);
@@ -328,6 +334,12 @@ while ((opt = getopt(argc, argv, "du:b:f:")) != -1) {
 }
 if (optind < argc) {
 	usage(argv[0], 1);
+}
+
+errno = 0;
+nice(nicev);
+if (errno) {
+	eprint(-1, "Cannot nice()");
 }
 
 eprint((shmid = shmget(0x4e545030 + ntpunit, sizeof (struct shmTime), IPC_CREAT|0600)), 
