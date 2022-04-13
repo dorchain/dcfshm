@@ -1,3 +1,9 @@
+dcfshm (0.4) UNRELEASED; urgency=medium
+
+  * Depends on sysvinit-utils
+
+ -- Joerg Dorchain <joerg@dorchain.net>  Wed, 13 Apr 2022 11:01:02 +0200
+
 dcfshm (0.3) UNRELEASED; urgency=medium
 
   * Cosmetics for Christmas
