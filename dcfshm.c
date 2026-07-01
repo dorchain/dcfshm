@@ -351,6 +351,7 @@ if ((shm = shmat(shmid, NULL, 0)) == (void *)-1) {
 memset(shm, 0, sizeof (struct shmTime));
 shm->mode = 1;
 shm->valid = 0;
+shm->precision = 7; /* (log2(ms); a rough guess for a cheap receiver */
 
 eprint((fd = open(device, O_RDONLY|O_NOCTTY)), "Cannot open device");
 #if 0

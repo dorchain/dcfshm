@@ -1,2 +1,5 @@
 - signal handler for TERM (cleanup)
 - signal handler for logging dcftime content (USR1)
+
+Get better documentation for struct shmTime, e.g.
+https://gitlab.com/gpsd/gpsd/-/blob/master/include/ntpshm.h?ref_type=heads
