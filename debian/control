@@ -3,7 +3,7 @@ Maintainer: Joerg Dorchain <joerg@dorchain.net>
 Section: misc
 Priority: optional
 Standards-Version: 3.9.2
-Build-Depends: debhelper (>= 9)
+Build-Depends: debhelper-compat (= 14), dh-sequence-single-binary
 
 Package: dcfshm
 Architecture: any
